@@ -23,6 +23,25 @@ google.com -> google dot com
  3. Ability to easily extend with private corrections
 
 
+## Getting Started
+ 1. Install with: `pip install commoncorrections`
+ 2. Import with: `from commoncorrections import CommonCorrections`
+
+## Usage Examples
+Turn numbers into words
+```python
+>>> cc = CommonCorrections()
+>>> print(cc.correct_str("123"))
+one two three
+```
+Turn decimals into words
+```python
+>>> cc = CommonCorrections()
+>>> print(cc.correct_str("23:59"))
+twenty three fifty nine
+```
+
+
 ## mypy Type Checks
 I tested installing mypy to check that types are compatible
 ```bash
@@ -33,3 +52,4 @@ Success: no issues found in 1 source file
 
 ## Change Log
  - v1.0.0 - First release 
+ - v1.0.1 - Fixed packaging issue 

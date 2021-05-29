@@ -1,3 +1,4 @@
-name = "commoncorrections"
 
-from commoncorrections.commoncorrections import *
+from .commoncorrections import (
+    CommonCorrections,
+)
