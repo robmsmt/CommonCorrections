@@ -7,23 +7,27 @@ def read_file(fname):
     with open(fname, "r") as f:
         return f.read()
 
+
+#python3 -m pip install --upgrade setuptools wheel
+#python3 setup.py sdist bdist_wheel
 setuptools.setup(
     name="commoncorrections",
-    version="1.0.1",
+    version="1.0.4",
     author="Rob Smith",
     author_email="robmsmt@gmail.com",
     description="A small python implementation of common ASR corrections",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/robmsmt/CommonCorrections",
-    packages=setuptools.find_packages(where="commoncorrections"),
-    package_data={'commoncorrections': ['commoncorrections/corrections.csv']},
+    # package_dir={"": "commoncorrections"},
+    # packages=setuptools.find_packages(where="commoncorrections"),
+    packages=setuptools.find_packages(exclude=['tests']),
     python_requires=">=3.6",
-    test_suite="tests/*",
+    package_data={
+        'commoncorrections': ['corrections.csv'],
+    },
     install_requires=[
-        elem.strip()
-        for elem in read_file("requirements.txt").splitlines()
-        if elem.strip()
+        elem.strip() for elem in read_file("requirements.txt").splitlines()
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -32,10 +36,9 @@ setuptools.setup(
     ],
 )
 
-#python3 -m pip install --upgrade setuptools wheel
-#python3 setup.py sdist bdist_wheel
+
 #sudo apt install twine -y
 #twine upload dist/*
 
 #one liner
-#rm -rf ./build ./dist ./commoncorrections.egg-info && python3 setup.py sdist bdist_wheel && twine upload dist/*
+#rm -rf ./build ./dist ./commoncorrections.egg-info && python3 -m build --wheel && twine upload dist/*

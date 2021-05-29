@@ -28,19 +28,30 @@ google.com -> google dot com
  2. Import with: `from commoncorrections import CommonCorrections`
 
 ## Usage Examples
-Turn numbers into words
+Turn numbers into words:
 ```python
 >>> cc = CommonCorrections()
->>> print(cc.correct_str("123"))
+>>> print(cc.correct_str("1 2 3"))
 one two three
 ```
-Turn decimals into words
+Turn times into words:
 ```python
 >>> cc = CommonCorrections()
 >>> print(cc.correct_str("23:59"))
 twenty three fifty nine
 ```
+Correct a pandas dataframe:
+```python
+df = pd.DataFrame(data={"transcript": ['5 4 3', "123 the time is 1:23"],
+                             "asr_1": ["five four three", "one two three the time is one twenty three"],
+                             "filename": ["./my_local_file.wav", "file2.wav"]})
+cc = CommonCorrections()
 
+# to correct only specific columns 
+new_df = cc.correct_df(df, column_list=['transcript', 'asr_1'])
+# to apply to whole dataframe
+new_whole_df = cc.correct_df(df)
+```
 
 ## mypy Type Checks
 I tested installing mypy to check that types are compatible
@@ -49,7 +60,8 @@ I tested installing mypy to check that types are compatible
 Success: no issues found in 1 source file
 ```
 
-
 ## Change Log
  - v1.0.0 - First release 
  - v1.0.1 - Fixed packaging issue 
+ - v1.0.3 - Fixed pip packaging issue 
+ - v1.0.4 - Fixed pip packaging issue 

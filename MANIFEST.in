@@ -1,0 +1,2 @@
+prune tests/
+recursive-exclude tests *
