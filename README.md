@@ -65,3 +65,4 @@ Success: no issues found in 1 source file
  - v1.0.1 - Fixed packaging issue 
  - v1.0.3 - Fixed pip packaging issue 
  - v1.0.4 - Fixed pip packaging issue 
+ - v1.0.5 - Fixed issue single digits

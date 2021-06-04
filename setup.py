@@ -8,11 +8,10 @@ def read_file(fname):
         return f.read()
 
 
-#python3 -m pip install --upgrade setuptools wheel
-#python3 setup.py sdist bdist_wheel
+
 setuptools.setup(
     name="commoncorrections",
-    version="1.0.4",
+    version="1.0.5",
     author="Rob Smith",
     author_email="robmsmt@gmail.com",
     description="A small python implementation of common ASR corrections",
@@ -38,6 +37,8 @@ setuptools.setup(
 
 
 #sudo apt install twine -y
+#python3 -m pip install --upgrade setuptools wheel
+#python3 setup.py sdist bdist_wheel
 #twine upload dist/*
 
 #one liner

@@ -77,9 +77,9 @@ class CommonCorrections(object):
     # digit and text
     def _fix_numbered_word(self, num_word: str) -> str:
         if all(char.isdigit() for char in num_word):
-            return " ".join([self.p.number_to_words(char, group=3) for char in num_word])
+            return self.p.number_to_words(num_word).replace(",", "")
         elif self.contains_digits(num_word):
-
+            #word is mixture of digit+character
             if self.contains_time(num_word):
                 # TIME DETECTED
                 return ' '.join([self.p.number_to_words(subword, group=3) if subword.isdigit() else subword for subword in num_word.split(":")])
@@ -123,9 +123,10 @@ class CommonCorrections(object):
         for col in itor:
             new_df[col + self.df_correction_suffix] = new_df[col].apply(lambda sent: self._fix_str(sent))
 
-            # todo time vs pandas.series replace and compare
+            # todo time vs pandas.series replace and compare - https://stackoverflow.com/questions/42012339/using-replace-efficiently-in-pandas
             # df[col+self.df_correction_suffix] = df[col+self.df_correction_suffix].replace(self.corrections)
         return new_df
 
     def correct_str(self, input_str: str) -> str:
         return self._fix_str(input_str)
+

@@ -58,11 +58,18 @@ class TestString(unittest.TestCase):
         cc = CommonCorrections()
         x = cc.correct_str("123")
         print(x)
-        self.assertEqual(x, "one two three")
+        self.assertEqual(x, "one hundred and twenty three")
 
         x = cc.correct_str("50102")
         print(x)
-        self.assertEqual(x, "five zero one zero two")
+        self.assertEqual(x, "fifty thousand one hundred and two")
+
+    def test_timer(self):
+        cc = CommonCorrections()
+        x = cc.correct_str("set timer for 10 mins")
+        print(x)
+        self.assertEqual(x, "set timer for ten mins")
+
 
     def test_decimal(self):
         cc = CommonCorrections()
