@@ -66,3 +66,4 @@ Success: no issues found in 1 source file
  - v1.0.3 - Fixed pip packaging issue 
  - v1.0.4 - Fixed pip packaging issue 
  - v1.0.5 - Fixed issue single digits
+ - v1.0.6 - Fixed case where dataframe contains a non-str type (e.g. int)

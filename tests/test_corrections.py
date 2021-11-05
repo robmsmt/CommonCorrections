@@ -107,6 +107,33 @@ class TestDataframe(unittest.TestCase):
         for i in range(len(df)):
             self.assertEqual(new_df.asr_1_corrected[i], cc.correct_str(df.asr_1[i]))
 
+
+
+    def test_nonstr(self):
+        df = pd.DataFrame(data={"transcript": ['5 4 3', "123 the time is 1:23"],
+                                     "asr_1": [123, 123.23],
+                                     "filename": ["./my_local_file.wav", "file2.wav"]})
+        cc = CommonCorrections()
+
+        col_list = ['transcript', 'asr_1']
+        new_df = cc.correct_df(df, column_list=['transcript', 'asr_1'])
+
+        # some columns should be identical
+        self.assertEqual(df.transcript.tolist(), new_df.transcript.tolist())
+        self.assertEqual(df.asr_1.tolist(), new_df.asr_1.tolist())
+        self.assertEqual(df.filename.tolist(), new_df.filename.tolist())
+
+        # new_df should have len(col_list) extra columns
+        self.assertEqual(len(df.columns)+len(col_list), len(new_df.columns))
+
+        # transcript
+        for i in range(len(df)):
+            self.assertEqual(new_df.transcript_corrected[i], cc.correct_str(df.transcript[i]))
+
+        # asr_1
+        for i in range(len(df)):
+            self.assertEqual(new_df.asr_1_corrected[i], cc.correct_str(df.asr_1[i]))
+
 # class CustomURL(unittest.TestCase):
 #
 #

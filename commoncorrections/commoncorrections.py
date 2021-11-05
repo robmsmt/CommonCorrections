@@ -107,7 +107,7 @@ class CommonCorrections(object):
     def _fix_str(self, sentence: str) -> str:
 
         # 1. handle numbers
-        numberless_sentence = self._swap_digits_for_spelt(sentence)
+        numberless_sentence = self._swap_digits_for_spelt(str(sentence))
 
         # 2. handle corrections
         return self.pattern.sub(lambda m: self.escaped_corrections[re.escape(m.group(0))], numberless_sentence)
