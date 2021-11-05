@@ -11,7 +11,7 @@ def read_file(fname):
 
 setuptools.setup(
     name="commoncorrections",
-    version="1.0.6",
+    version="1.0.8",
     author="Rob Smith",
     author_email="robmsmt@gmail.com",
     description="A small python implementation of common ASR corrections",
@@ -42,4 +42,4 @@ setuptools.setup(
 #twine upload dist/*
 
 #one liner
-#rm -rf ./build ./dist ./commoncorrections.egg-info && python3 -m build --wheel && twine upload dist/*
+#rm -rf ./build ./dist ./commoncorrections.egg-info && python3 setup.py sdist bdist_wheel && twine upload dist/*

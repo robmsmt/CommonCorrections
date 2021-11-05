@@ -3,6 +3,7 @@ import re
 from io import BytesIO, IOBase
 from pathlib import Path
 from typing import Union, Optional, List
+import pprint
 
 import inflect  # type: ignore
 import pandas as pd  # type: ignore
@@ -56,6 +57,12 @@ class CommonCorrections(object):
         self.escaped_corrections = dict((re.escape(k), v) for k, v in self.corrections.items())
         self.pattern = re.compile("|".join(self.escaped_corrections.keys()))  # todo consider order and substring check on the corrections
 
+    def __str__(self):
+        return repr(pprint.pprint(self.corrections, indent=2))
+
+    def __repr__(self):
+        return repr(pprint.pprint(self.corrections, indent=2))
+
     def contains_digits(self, w: str) -> bool:
         return bool(self.digits.search(w))
 
@@ -69,7 +76,9 @@ class CommonCorrections(object):
         if type(csv_bytes_or_dict) is str or type(csv_bytes_or_dict) is BytesIO:
             new_df = pd.read_csv(csv_bytes_or_dict, header=None, comment="#", skipinitialspace=True, na_filter=False)
         elif type(csv_bytes_or_dict) == dict:
-            new_df = pd.DataFrame(csv_bytes_or_dict)
+            f = [k for k in csv_bytes_or_dict]
+            r = [csv_bytes_or_dict[k] for k in csv_bytes_or_dict]
+            new_df = pd.DataFrame.from_dict({0:f, 1:r})
         else:
             raise DatatypeNotRecognized
         self.df = self.df.append(new_df, ignore_index=True)

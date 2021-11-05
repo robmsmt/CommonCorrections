@@ -70,7 +70,6 @@ class TestString(unittest.TestCase):
         print(x)
         self.assertEqual(x, "set timer for ten mins")
 
-
     def test_decimal(self):
         cc = CommonCorrections()
         x = cc.correct_str("12.5")
@@ -78,14 +77,29 @@ class TestString(unittest.TestCase):
         x = cc.correct_str("53.4")
         self.assertEqual(x, "fifty three point four")
 
+    def test_additonal_corrections(self):
+        # this should strip out any commas
+
+        d = {
+            ',': '',
+            '!': '',
+            'TESTFIND': 'TESTREPLACE'
+        }
+
+        cc = CommonCorrections(additional_corrections_dict=d)
+        self.assertEqual(cc.correct_str("hello, friend"), "hello friend")
+        self.assertEqual(cc.correct_str("hello, friend!"), "hello friend")
+        self.assertEqual(cc.correct_str("hello TESTFIND"), "hello TESTREPLACE")
+        self.assertEqual(cc.correct_str("hello TESTREPLACE"), "hello TESTREPLACE")
+        self.assertEqual(cc.correct_str("hello, TESTFIND!"), "hello TESTREPLACE")
+
 
 class TestDataframe(unittest.TestCase):
 
-
     def test_df(self):
         df = pd.DataFrame(data={"transcript": ['5 4 3', "123 the time is 1:23"],
-                                     "asr_1": ["five four three", "one two three the time is one twenty three"],
-                                     "filename": ["./my_local_file.wav", "file2.wav"]})
+                                "asr_1": ["five four three", "one two three the time is one twenty three"],
+                                "filename": ["./my_local_file.wav", "file2.wav"]})
         cc = CommonCorrections()
 
         col_list = ['transcript', 'asr_1']
@@ -97,7 +111,7 @@ class TestDataframe(unittest.TestCase):
         self.assertEqual(df.filename.tolist(), new_df.filename.tolist())
 
         # new_df should have len(col_list) extra columns
-        self.assertEqual(len(df.columns)+len(col_list), len(new_df.columns))
+        self.assertEqual(len(df.columns) + len(col_list), len(new_df.columns))
 
         # transcript
         for i in range(len(df)):
@@ -107,12 +121,10 @@ class TestDataframe(unittest.TestCase):
         for i in range(len(df)):
             self.assertEqual(new_df.asr_1_corrected[i], cc.correct_str(df.asr_1[i]))
 
-
-
     def test_nonstr(self):
         df = pd.DataFrame(data={"transcript": ['5 4 3', "123 the time is 1:23"],
-                                     "asr_1": [123, 123.23],
-                                     "filename": ["./my_local_file.wav", "file2.wav"]})
+                                "asr_1": [123, 123.23],
+                                "filename": ["./my_local_file.wav", "file2.wav"]})
         cc = CommonCorrections()
 
         col_list = ['transcript', 'asr_1']
@@ -124,7 +136,7 @@ class TestDataframe(unittest.TestCase):
         self.assertEqual(df.filename.tolist(), new_df.filename.tolist())
 
         # new_df should have len(col_list) extra columns
-        self.assertEqual(len(df.columns)+len(col_list), len(new_df.columns))
+        self.assertEqual(len(df.columns) + len(col_list), len(new_df.columns))
 
         # transcript
         for i in range(len(df)):
