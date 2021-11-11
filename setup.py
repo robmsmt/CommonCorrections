@@ -11,7 +11,7 @@ def read_file(fname):
 
 setuptools.setup(
     name="commoncorrections",
-    version="1.0.9",
+    version="1.0.10",
     author="Rob Smith",
     author_email="robmsmt@gmail.com",
     description="A small python implementation of common ASR corrections",
