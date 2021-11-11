@@ -69,3 +69,4 @@ Success: no issues found in 1 source file
  - v1.0.6 - Fixed case where dataframe contains a non-str type (e.g. int)
  - v1.0.7 - Fixed adding additional dict works and added print(cc) object
  - v1.0.8 - Fixed print bug with repl
+ - v1.0.8 - Added some words with space in default corrections csv
