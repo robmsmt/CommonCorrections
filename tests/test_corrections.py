@@ -93,6 +93,11 @@ class TestString(unittest.TestCase):
         self.assertEqual(cc.correct_str("hello TESTREPLACE"), "hello TESTREPLACE")
         self.assertEqual(cc.correct_str("hello, TESTFIND!"), "hello TESTREPLACE")
 
+    def test_spacing(self):
+        cc = CommonCorrections()
+        x1 = cc.correct_str(" don't ")
+        x2 = cc.correct_str(" do n't ")
+        self.assertEqual(x1, x2)
 
 class TestDataframe(unittest.TestCase):
 

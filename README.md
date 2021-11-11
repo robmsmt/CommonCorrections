@@ -71,3 +71,4 @@ Success: no issues found in 1 source file
  - v1.0.8 - Fixed print bug with repl
  - v1.0.9 - Added some words with space in default corrections csv
  - v1.0.10 - Typo in some corrections
+ - v1.0.11 - Added test case and fixed mistake
